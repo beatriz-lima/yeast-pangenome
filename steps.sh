@@ -16,7 +16,7 @@ cat ordered_genomes | while read file; do zcat $file; done | pigz >Sc+Sp.pan.fa.
 time ./pan-minimap2 $(ls *genome.prefix* | grep -v Sarb | grep -v mt. ) | pigz >Sc+Sp.pan.paf.gz
 
 # use fpa to filter short alignments
-zcat Sc+Sp.pan.paf.gz | fpa -l 10000 | pigz >Sc+Sp.pan.fpal10k.paf.gz
+zcat Sc+Sp.pan.paf.gz | fpa drop -l 10000 | pigz >Sc+Sp.pan.fpal10k.paf.gz
 
 # construct the graph from the alignments using seqwish
 mkdir -p work # a work directory that's local, files created here will be deleted when seqwish completes
